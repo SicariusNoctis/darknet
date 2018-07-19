@@ -15,6 +15,8 @@
 #include <sys/time.h>
 #endif
 
+#include "coord_writer.h"
+
 #define FRAMES 3
 
 #ifdef OPENCV

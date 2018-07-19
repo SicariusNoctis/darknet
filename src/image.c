@@ -23,6 +23,8 @@
 #include "http_stream.h"
 #endif
 
+#include <string>
+
 int windows = 0;
 
 float colors[6][3] = { {1,0,1}, {0,0,1},{0,1,1},{0,1,0},{1,1,0},{1,0,0} };
@@ -297,6 +299,7 @@ void draw_detections_v3(image im, detection *dets, int num, float thresh, char *
 		for (j = 0; j < classes; ++j) {
 			if (selected_detections[i].det.prob[j] > thresh && j != best_class) {
 				printf("%s: %.0f%%\n", names[j], selected_detections[i].det.prob[j] * 100);
+				//printf("HELOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");																						// Does nothing
 			}
 		}
 	}
@@ -421,6 +424,8 @@ void draw_detections(image im, int num, float thresh, box *boxes, float **probs,
             if(top < 0) top = 0;
             if(bot > im.h-1) bot = im.h-1;
 			printf("%s: %.0f%%", names[class_id], prob * 100);
+			//printf("HELLOOO ARE YOU READING ME???");																					// Arman added this. Does nothing
+			//printf("Bounding Box: Left=%d, Top=%d, Right=%d, Bottom=%d\n", left, top, right, bot);									// Arman added this. Does nothing
 			
 			//printf(" - id: %d, x_center: %d, y_center: %d, width: %d, height: %d",
 			//	class_id, (right + left) / 2, (bot - top) / 2, right - left, bot - top);
@@ -443,6 +448,9 @@ void draw_detections_cv_v3(IplImage* show_img, detection *dets, int num, float t
 	if (!show_img) return;
 	static int frame_id = 0;
 	frame_id++;
+	
+	// using namespace std;
+	std::string msg;
 
 	for (i = 0; i < num; ++i) {
 		char labelstr[4096] = { 0 };
@@ -458,6 +466,7 @@ void draw_detections_cv_v3(IplImage* show_img, detection *dets, int num, float t
 					strcat(labelstr, names[j]);
 				}
 				printf("%s: %.0f%% ", names[j], dets[i].prob[j] * 100);
+				
 			}
 		}
 		if (class_id >= 0) {
